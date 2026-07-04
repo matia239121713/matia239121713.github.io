@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>matia web (nueva)</title>
+    <style>
+        :root {
+            --bg-principal: #f4f4f9;
+            --bg-tarjeta: #ffffff;
+            --texto-principal: #333333;
+            --texto-secundario: #666666;
+            --color-acento: #ff6b6b;
+            --borde: #e0e0e0;
+        }
+
+        [data-theme="dark"] {
+            --bg-principal: #121214;
+            --bg-tarjeta: #1a1a1e;
+            --texto-principal: #e1e1e6;
+            --texto-secundario: #a8a8b3;
+            --color-acento: #64dfdf;
+            --borde: #29292e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-principal);
+            color: var(--texto-principal);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .contenedor {
+            background-color: var(--bg-tarjeta);
+            border: 1px solid var(--borde);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .btn-tema {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .subtitulo {
+            color: var(--color-acento);
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .descripcion {
+            color: var(--texto-secundario);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .enlaces-sociales {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .enlace-clic {
+            display: block;
+            padding: 14px;
+            border: 1px solid var(--borde);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--texto-principal);
+            font-weight: 500;
+            background-color: transparent;
+            transition: all 0.2s ease;
+        }
+
+        .enlace-clic:hover {
+            border-color: var(--color-acento);
+            background-color: var(--color-acento);
+            color: #121214;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <button class="btn-tema" id="toggleTema" title="Cambiar tema">🌗</button>
+        
+        
+        <h1>En construccion</h1>
+        <div class="subtitulo">este sitio esta en creacion</div>
+        
+        <p class="descripcion">
+            Proximamente aca sera el nuevo sitio de matia
+        </p>
+        
+        <div class="enlaces-sociales">
+            <a href="https://github.com/matia239121713" target="_blank" class="enlace-clic">mi cuenta</a>
+            <a href="https://www.threads.com/@cl_matia.xd" target="_blank" class="enlace-clic">mi threads</a>
+            <a href="https://sites.google.com/view/matia239121713" target="_blank" class="enlace-clic">pagina vieja</a>
+        </div>
+    </div>
+
+    <script>
+        const botonTema = document.getElementById('toggleTema');
+        const temaActual = localStorage.getItem('tema') || 'light';
+
+        if (temaActual === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+
+        botonTema.addEventListener('click', () => {
+            let tema = document.documentElement.getAttribute('data-theme');
+            if (tema === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('tema', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('tema', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>
