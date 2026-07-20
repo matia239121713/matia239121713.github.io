@@ -1,151 +1,81 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>matia web (nueva)</title>
-    <style>
-        :root {
-            --bg-principal: #f4f4f9;
-            --bg-tarjeta: #ffffff;
-            --texto-principal: #333333;
-            --texto-secundario: #666666;
-            --color-acento: #ff6b6b;
-            --borde: #e0e0e0;
-        }
-
-        [data-theme="dark"] {
-            --bg-principal: #121214;
-            --bg-tarjeta: #1a1a1e;
-            --texto-principal: #e1e1e6;
-            --texto-secundario: #a8a8b3;
-            --color-acento: #64dfdf;
-            --borde: #29292e;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg-principal);
-            color: var(--texto-principal);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .contenedor {
-            background-color: var(--bg-tarjeta);
-            border: 1px solid var(--borde);
-            border-radius: 16px;
-            padding: 40px;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            position: relative;
-        }
-
-        .btn-tema {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-
-        h1 {
-            font-size: 1.8rem;
-            margin-bottom: 8px;
-        }
-
-        .subtitulo {
-            color: var(--color-acento);
-            font-weight: 600;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-        }
-
-        .descripcion {
-            color: var(--texto-secundario);
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .enlaces-sociales {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .enlace-clic {
-            display: block;
-            padding: 14px;
-            border: 1px solid var(--borde);
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--texto-principal);
-            font-weight: 500;
-            background-color: transparent;
-            transition: all 0.2s ease;
-        }
-
-        .enlace-clic:hover {
-            border-color: var(--color-acento);
-            background-color: var(--color-acento);
-            color: #121214;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Threads OAuth Callback</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #0f0f0f;
+      color: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .box {
+      max-width: 500px;
+      padding: 2rem;
+      background: #1a1a1a;
+      border-radius: 12px;
+      text-align: center;
+    }
+    code {
+      display: block;
+      word-break: break-all;
+      background: #000;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      color: #7fd88f;
+      font-size: 0.9rem;
+    }
+    button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      background: #7fd88f;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .aviso {
+      color: #e88;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+    }
+  </style>
 </head>
 <body>
+  <div class="box">
+    <h2>Código de autorización recibido</h2>
+    <p>Copia este código y pégalo en tu script de autenticación:</p>
+    <code id="code-output">Buscando código...</code>
+    <button id="copy-btn" style="display:none;">Copiar código</button>
+    <p id="error-msg" class="aviso" style="display:none;">
+      No se encontró ningún parámetro "code" en la a.
+    </p>
+  </div>
 
-    <div class="contenedor">
-        <button class="btn-tema" id="toggleTema" title="Cambiar tema">🌗</button>
-        
-        
-        <h1>En construccion</h1>
-        <div class="subtitulo">este sitio esta en creacion</div>
-        
-        <p class="descripcion">
-            Proximamente aca sera el nuevo sitio de matia
-        </p>
-        
-        <div class="enlaces-sociales">
-            <a href="https://github.com/matia239121713" target="_blank" class="enlace-clic">mi cuenta</a>
-            <a href="https://www.threads.com/@cl_matia.xd" target="_blank" class="enlace-clic">mi threads</a>
-            <a href="https://sites.google.com/view/matia239121713" target="_blank" class="enlace-clic">pagina vieja</a>
-        </div>
-    </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    const output = document.getElementById("code-output");
+    const btn = document.getElementById("copy-btn");
+    const errorMsg = document.getElementById("error-msg");
 
-    <script>
-        const botonTema = document.getElementById('toggleTema');
-        const temaActual = localStorage.getItem('tema') || 'light';
-
-        if (temaActual === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        }
-
-        botonTema.addEventListener('click', () => {
-            let tema = document.documentElement.getAttribute('data-theme');
-            if (tema === 'dark') {
-                document.documentElement.removeAttribute('data-theme');
-                localStorage.setItem('tema', 'light');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('tema', 'dark');
-            }
-        });
-    </script>
+    if (code) {
+      output.textContent = code;
+      btn.style.display = "inline-block";
+      btn.addEventListener("click", () => {
+        navigator.clipboard.writeText(code);
+        btn.textContent = "¡Copiado!";
+      });
+    } else {
+      output.style.display = "none";
+      errorMsg.style.display = "block";
+    }
+  </script>
 </body>
 </html>
